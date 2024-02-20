@@ -62,9 +62,9 @@ dependencies {
     // Obj - a simple Wavefront OBJ file loader
     // https://github.com/javagl/Obj
     implementation ("de.javagl:obj:0.4.0")
-    implementation ("androidx.appcompat:appcompat:1.1.0")
+    //noinspection GradleCompatible,GradleCompatible
+    implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.lifecycle:lifecycle-common-java8:2.2.0")
-
     implementation ("com.google.android.material:material:1.1.0")
 
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
@@ -97,42 +97,7 @@ dependencies {
     implementation ("io.insert-koin:koin-core:3.5.0")
     implementation ("io.insert-koin:koin-android:3.5.0")
     implementation ("io.insert-koin:koin-androidx-compose:3.4.1")
+    implementation ("com.google.ar.sceneform.ux:sceneform-ux:1.17.1")
 
 }
 
-
-//
-//// Extracts the shared libraries from AARs in the native configuration
-//// so that NDK builds can access these libraries.
-//task extractNativeLibraries() {
-//    // Extract every time.
-//    outputs.upToDateWhen { false }
-//
-//    doFirst {
-//        configurations.natives.files.each { f ->
-//            copy {
-//                from zipTree(f)
-//                into arcore_libpath
-//                        include "jni/**/*"
-//            }
-//        }
-//    }
-//}
-//
-//tasks.whenTaskAdded {
-//        task-> if (task.name.contains("external") && !task.name.contains("Clean")) {
-//    task.dependsOn(extractNativeLibraries)
-//}
-//}
-//
-//
-//
-//// From the sample app.
-//externalNativeBuild {
-//    cmake {
-//        cppFlags "-std=c++11", "-Wall"
-//        arguments "-DANDROID_STL=c++_static",
-//        "-DARCORE_LIBPATH=${arcore_libpath}/jni",
-//        "-DARCORE_INCLUDE=${project.rootDir}/../../libraries/include"
-//    }
-//}

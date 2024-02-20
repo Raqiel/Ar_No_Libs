@@ -36,8 +36,8 @@ class ArViewModel() : ViewModel() {
                 Log.d(TAG, "unsupported or unknown")
             }
         }
-    }
-    fun createSession(context: Context) {
+    } fun createSession(context: Context):Boolean {
+
 
         if (ArCoreApk.getInstance().checkAvailability(context) == ArCoreApk.Availability.SUPPORTED_INSTALLED) {
             try {
@@ -46,15 +46,19 @@ class ArViewModel() : ViewModel() {
                 // Do feature-specific operations here, such as enabling depth or turning on
                 // support for Augmented Faces.
                 session?.configure(config)
+                return true
 
             } catch (e: UnavailableException) {
                 Log.d(TAG, "UnavailableException ")
+                return false
             } catch (e: FatalException) {
                 Log.d(TAG, "FatalException: ARCore encountered a severe error.")
+                return false
             }
         } else {
             Log.d(TAG, "Handle ARCore not supported or not installed scenarios here ")
             // Handle ARCore not supported or not installed scenarios here.
+            return false
         }
     }
 
